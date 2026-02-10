@@ -40,7 +40,7 @@ generate_dictionary() {
         echo "${word^}"        >> "$WORDLIST_FILE"
         echo "${word/a/@}"     >> "$WORDLIST_FILE"
         echo "${word/e/3}"     >> "$WORDLIST_FILE"
-    done < "$INPUT_DIR/sample_passwords.txt"
+    done < "$INPUT_DIR/passwords.txt"
 
     sort -u "$WORDLIST_FILE" -o "$WORDLIST_FILE"
 
@@ -108,7 +108,7 @@ analyze_password_strength() {
         esac
 
         echo "$password → $strength" >> "$ANALYSIS_FILE"
-    done < "$INPUT_DIR/sample_passwords.txt"
+    done < "$INPUT_DIR/passwords.txt"
 
     echo "[✓] Password strength analysis done"
 }
@@ -174,3 +174,4 @@ generate_report
 echo "============================================"
 echo " Password Audit Completed Successfully"
 echo "============================================"
+
