@@ -15,11 +15,18 @@ ANALYSIS_FILE="$OUTPUT_DIR/analysis.txt"
 REPORT_FILE="$OUTPUT_DIR/report.txt"
 
 mkdir -p "$OUTPUT_DIR"
+
 # -----------------------------
 # Input Validation
 # -----------------------------
+[[ -d "$INPUT_DIR" ]] || { echo "Missing input directory: $INPUT_DIR"; exit 1; }
 [[ -f "$INPUT_DIR/passwords.txt" ]] || { echo "Missing $INPUT_DIR/passwords.txt"; exit 1; }
 [[ -f "$INPUT_DIR/hashes.txt"    ]] || { echo "Missing $INPUT_DIR/hashes.txt"; exit 1; }
+
+# -----------------------------
+# Dependency Check
+# -----------------------------
+command -v bc >/dev/null || { echo "bc is required but not installed"; exit 1; }
 
 # -----------------------------
 # Banner
@@ -96,6 +103,8 @@ analyze_password_strength() {
 
     while read -r password
     do
+        [[ -z "$password" ]] && continue
+        
         score=0
 
         [[ ${#password} -ge 8 ]] && ((score++))
@@ -132,8 +141,8 @@ estimate_bruteforce_time() {
 
     for LENGTH in 6 8 10
     do
-        COMBINATIONS=$(echo "$CHARACTER_SET^$LENGTH" | bc -1)
-        TIME_SECONDS=$(echo "$COMBINATIONS / $ATTEMPTS_PER_SECOND" | bc -1)
+        COMBINATIONS=$(echo "$CHARACTER_SET^$LENGTH" | bc -l)
+        TIME_SECONDS=$(echo "$COMBINATIONS / $ATTEMPTS_PER_SECOND" | bc -l)
 
         echo "Password Length $LENGTH → Approx. $TIME_SECONDS seconds" \
             >> "$ANALYSIS_FILE"
@@ -179,6 +188,7 @@ generate_report
 echo "============================================"
 echo " Password Audit Completed Successfully"
 echo "============================================"
+
 
 
 
