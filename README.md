@@ -59,7 +59,7 @@ brew install bc
 ### 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/password-security-audit-toolkit.git
+git clone https://github.com/BenwinbBenny/Password-Security-Audit-Toolkit.git
 cd password-security-audit-toolkit
 ```
 ---
