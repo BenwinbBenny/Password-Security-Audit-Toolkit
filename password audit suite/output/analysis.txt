@@ -1,0 +1,22 @@
+HASH IDENTIFICATION RESULTS
+----------------------------
+5f4dcc3b5aa765d61d8327deb882cf99 → MD5 (Possible)
+e99a18c428cb38d5f260853678922e03 → MD5 (Possible)
+$6$somesalt$abcdefghijklmnopqrstuvxyz1234567890 → SHA-512 (Linux Shadow)
+aad3b435b51404eeaad3b435b51404ee → NTLM (Possible)
+
+PASSWORD STRENGTH ANALYSIS
+---------------------------
+password → Very Weak
+admin123 → Weak
+Welcome → Medium
+Summer2024 → Strong
+P@ssw0rd → Strong
+LetMeIn → Weak
+Cyber@123 → Very Strong
+
+BRUTE-FORCE TIME ESTIMATION
+---------------------------
+Password Length 6 → Approx. 568002355 seconds
+Password Length 8 → Approx. 218340105584 seconds
+Password Length 10 → Approx. 83929936586812 seconds
