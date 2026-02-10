@@ -75,7 +75,7 @@ identify_hashes() {
         else
             echo "$hash → Unknown Format" >> "$ANALYSIS_FILE"
         fi
-    done < "$INPUT_DIR/sample_hashes.txt"
+    done < "$INPUT_DIR/hashes.txt"
 
     echo "[✓] Hash identification completed"
 }
@@ -172,6 +172,7 @@ estimate_bruteforce_time
 generate_report
 
 echo "============================================"
-echo " Password Audit Completed Successfully"
+echo " Password Audit Completed Successfully"F
 echo "============================================"
+
 
