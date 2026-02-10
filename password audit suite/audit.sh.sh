@@ -15,6 +15,11 @@ ANALYSIS_FILE="$OUTPUT_DIR/analysis.txt"
 REPORT_FILE="$OUTPUT_DIR/report.txt"
 
 mkdir -p "$OUTPUT_DIR"
+# -----------------------------
+# Input Validation
+# -----------------------------
+[[ -f "$INPUT_DIR/passwords.txt" ]] || { echo "Missing $INPUT_DIR/passwords.txt"; exit 1; }
+[[ -f "$INPUT_DIR/hashes.txt"    ]] || { echo "Missing $INPUT_DIR/hashes.txt"; exit 1; }
 
 # -----------------------------
 # Banner
@@ -60,7 +65,7 @@ identify_hashes() {
     do
         hash_length=${#hash}
 
-        if [[ $hash == *"\$6\$"* ]]; then
+        if [[ $hash == *\$6\$* ]]; then
             echo "$hash → SHA-512 (Linux Shadow)" >> "$ANALYSIS_FILE"
 
         elif [[ $hash_length -eq 32 ]]; then
@@ -127,8 +132,8 @@ estimate_bruteforce_time() {
 
     for LENGTH in 6 8 10
     do
-        COMBINATIONS=$(echo "$CHARACTER_SET^$LENGTH" | bc)
-        TIME_SECONDS=$(echo "$COMBINATIONS / $ATTEMPTS_PER_SECOND" | bc)
+        COMBINATIONS=$(echo "$CHARACTER_SET^$LENGTH" | bc -1)
+        TIME_SECONDS=$(echo "$COMBINATIONS / $ATTEMPTS_PER_SECOND" | bc -1)
 
         echo "Password Length $LENGTH → Approx. $TIME_SECONDS seconds" \
             >> "$ANALYSIS_FILE"
@@ -172,7 +177,8 @@ estimate_bruteforce_time
 generate_report
 
 echo "============================================"
-echo " Password Audit Completed Successfully"F
+echo " Password Audit Completed Successfully"
 echo "============================================"
+
 
 
