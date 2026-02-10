@@ -34,7 +34,7 @@ password-audit-suite/
 │   ├── wordlist.txt             # Generated password dictionary
 │   ├── analysis.txt             # Technical analysis output
 │   └── report.txt               # Final audit report
-│
+│──LICENSE
 └── README.md                    # Project documentation
 ```
 ---
